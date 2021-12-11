@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>生日快乐</title>
+		<meta charset="utf-8">
+		<script type="text/javascript" src="./js/vue.js"></script>
+		<link rel="stylesheet" type="text/css" href="./css/animate.css">
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.btn-box{
+				height: 30vh;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			.btn{
+				width: 30%;
+				height: 4rem;
+				border-radius: 5rem;
+				font-size: 2rem;
+				color: #fff;
+				background-color: rgb(134,185,81);
+			}
+			.content{
+				width: 100%;
+				height: 70vh;
+				font-size: 6rem;
+				/*background-color: orange;*/
+				/*color: skyblue;*/
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<transition name="v" enter-active-class="animate__animated animate__zoomInDown" leave-active-class="animate__animated animate__zoomOutDown">
+				<div :style="styleInfo" class="content" v-show="isShow">
+					<P >老妈，生日快乐！</P>
+				</div>
+			</transition>
+			<div class="btn-box">
+				<button class='btn' @click="isShow = !isShow">点我点我</button>
+			</div>
+		</div>
+		<script type="text/javascript">
+			let app = new Vue({
+				el:"#app",
+				data:{
+					isShow:false,
+					styleInfo:{color:"red"}
+				},
+				mounted(){
+					let _this = this;
+					setInterval(function(){
+						_this.styleInfo.color = _this.getRandomColor();
+						// console.log(_this.styleInfo.color)
+					},1000)
+				},
+				methods:{
+					//获取随机颜色
+					getRandomColor(){
+						let r = Math.ceil(Math.random() * 255);
+						let g = Math.ceil(Math.random() * 255);
+						let b = Math.ceil(Math.random() * 255);
+						let rgb = "rgb(" + r + "," + g + "," + b + ")";
+						// console.log(rgb)
+						return rgb;
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
